@@ -1,0 +1,14 @@
+{
+  "name": "gorest-rest-service-tests",
+  "version": "1.0.0",
+  "description": "To automate CRUD services in https://gorest.co.in/ using Javascript, Plywright and / or Jest library (optional).",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.10.1"
+  }
+}
