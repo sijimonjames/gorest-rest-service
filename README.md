@@ -23,3 +23,9 @@ Type below commant in your IDE terminal
 
 ### For existing project / from a repo
 use command:
+
+
+### Faker data
+
+npm install @faker-js/faker --save-dev
+
