@@ -15,17 +15,39 @@ To automate CRUD services in https://gorest.co.in/ using Javascript, Plywright a
 >> export PATH=$PATH:/usr/local/bin
 ```
 - to install playwright, run below command in the IDE terminal / command line. official website is https://playwright.dev/
+
+clone project from;
+
+https://github.com/sijimonjames/gorest-rest-service-tests.git
+
+### For existing project / from a repo clone
+use command:
+```
+npm ci
+```
+
 ### For a new project
 Type below commant in your IDE terminal
 ```
 >> npm init playwright@latest
 ```
 
-### For existing project / from a repo
-use command:
-
-
-### Faker data
+### install Faker data
 
 npm install @faker-js/faker --save-dev
+
+fake data is used to create user, as data is not so important for the api.
+
+## Run tests
+
+```
+npx playwright test
+npx playwright test --debug
+```
+
+## CI CD
+
+Git hub actions will be invoked and run all tests when a push / update repo is done. This can be found under the actions tab of Github
+
+https://github.com/sijimonjames/gorest-rest-service-tests/actions
 

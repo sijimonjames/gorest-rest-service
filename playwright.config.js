@@ -42,7 +42,7 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: 'gorest-api-tests',
       use: { ...devices['Desktop Chrome'] },
     },
 
