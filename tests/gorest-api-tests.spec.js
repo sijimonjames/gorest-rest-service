@@ -26,12 +26,12 @@ test.describe('CRUD operations for GOREST api', async () => {
 
         const CreateUserData = await apiUtils.CreateUser(userUri, userData);
         userid = CreateUserData.id;
+        expect(userid).toBeGreaterThan(0);
 
         expect(CreateUserData.name).toBe(userData.name);
-        expect(CreateUserData.email).toBe(userData.email)
+        //another way to verify
+        expect(CreateUserData).toHaveProperty("email", userData.email)
 
-
-        expect(CreateUserData.id).toBeGreaterThan(0);
     })
 
     test('should return success to read user from gorest api @regression', async () => {
@@ -45,7 +45,7 @@ test.describe('CRUD operations for GOREST api', async () => {
             headers: config.use.headers
         };
 
-        const response = await apiContext.get(userUri + "/" + userid, fetchData);
+        const response = await apiContext.get(`${userUri}/${userid}`, fetchData);
 
         const body = await response.json();
         responseVerification.assertResponseStatusCode(response.status(), 200);
@@ -70,7 +70,7 @@ test.describe('CRUD operations for GOREST api', async () => {
             }
         };
 
-        const response = await apiContext.put(userUri + "/" + userid, fetchData);
+        const response = await apiContext.put(`${userUri}/${userid}`, fetchData);
 
         const updateData = await response.json();
         responseVerification.assertResponseStatusCode(response.status(), 200);
@@ -95,7 +95,7 @@ test.describe('CRUD operations for GOREST api', async () => {
             headers: config.use.headers
         };
 
-        const response = await apiContext.delete(userUri + "/" + userid, fetchData);
+        const response = await apiContext.delete(`${userUri}/${userid}`, fetchData);
 
         responseVerification.assertResponseStatusCode(response.status(), 204);
 
