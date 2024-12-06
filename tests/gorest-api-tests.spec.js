@@ -1,9 +1,10 @@
 import { test, expect, request } from '@playwright/test';
 import config from '../playwright.config'
 import { generateUserData } from '../utils/faker_data.js'
-
 import ApiEndPoint from '../utils/ApiEndPoint';
+
 const ApiUtils = require('../utils/ApiUtils.js');
+
 
 test.describe('CRUD operations for GOREST api', async () => {
 
@@ -24,11 +25,28 @@ test.describe('CRUD operations for GOREST api', async () => {
     test('should return success for create user gorest api @smoke', async () => {
 
         const CreateUserData = await apiUtils.CreateUser(userUri, userData);
+        
         userid = CreateUserData.id;
         expect(userid).toBeGreaterThan(0);
         expect(CreateUserData.name).toBe(userData.name);
         //another way to verify
         expect(CreateUserData).toHaveProperty("email", userData.email)
+
+    })
+
+    test('should return unauthorized for create user with no authontication @smoke', async () => {
+
+        const createData = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(userData)
+        };
+
+        const response = await apiContext.post(`${userUri}`, createData);
+        const body = await response.json();
+        ApiUtils.assertResponseStatusCode(response, 401);
+
 
     })
 

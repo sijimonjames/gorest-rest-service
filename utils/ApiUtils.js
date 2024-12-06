@@ -1,3 +1,4 @@
+import { log } from 'console';
 import config from '../playwright.config'
 import { expect } from '@playwright/test';
 
@@ -23,8 +24,14 @@ class ApiUtils {
 
     }
 
-     static assertSuccessResponseStatusCode(response) {
+    static assertSuccessResponseStatusCode(response) {
+        console.log(`Status Code is: ${response.status()}`)
         expect(response.ok()).toBeTruthy();
+    }
+
+    static assertResponseStatusCode(response, statusCode) {
+        console.log(`Status Code is: ${response.status()}`)
+        expect(response.status()).toBe(statusCode);
     }
 
 }
