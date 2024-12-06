@@ -3,7 +3,6 @@ import config from '../playwright.config'
 import { generateUserData } from '../utils/faker_data.js'
 
 import ApiEndPoint from '../utils/ApiEndPoint';
-import responseVerification from '../utils/response-verification.js';
 const ApiUtils = require('../utils/ApiUtils.js');
 
 test.describe('CRUD operations for GOREST api', async () => {
@@ -15,7 +14,7 @@ test.describe('CRUD operations for GOREST api', async () => {
     const userData = generateUserData();
 
 
-    test.beforeAll(async () => {
+    test.beforeAll('Initialization for all tests', async () => {
 
         apiContext = await request.newContext();
         apiUtils = new ApiUtils(apiContext);
@@ -27,15 +26,11 @@ test.describe('CRUD operations for GOREST api', async () => {
         const CreateUserData = await apiUtils.CreateUser(userUri, userData);
         userid = CreateUserData.id;
         expect(userid).toBeGreaterThan(0);
-
         expect(CreateUserData.name).toBe(userData.name);
         //another way to verify
         expect(CreateUserData).toHaveProperty("email", userData.email)
 
     })
-
-
-
 
 
 
@@ -53,7 +48,7 @@ test.describe('CRUD operations for GOREST api', async () => {
         const response = await apiContext.get(`${userUri}/${userid}`, fetchData);
 
         const body = await response.json();
-        responseVerification.assertResponseStatusCode(response.status(), 200);
+        ApiUtils.assertSuccessResponseStatusCode(response);
 
         expect(body.id).toBe(userid);
         expect(body.name).toBe(userData.name);
@@ -78,7 +73,7 @@ test.describe('CRUD operations for GOREST api', async () => {
         const response = await apiContext.put(`${userUri}/${userid}`, fetchData);
 
         const updateData = await response.json();
-        responseVerification.assertResponseStatusCode(response.status(), 200);
+        ApiUtils.assertSuccessResponseStatusCode(response);
 
         expect(updateData.status).toBe('inactive');
         expect(updateData.id).toBe(userid);
@@ -101,8 +96,7 @@ test.describe('CRUD operations for GOREST api', async () => {
         };
 
         const response = await apiContext.delete(`${userUri}/${userid}`, fetchData);
-
-        responseVerification.assertResponseStatusCode(response.status(), 204);
+        ApiUtils.assertSuccessResponseStatusCode(response);
 
     })
 

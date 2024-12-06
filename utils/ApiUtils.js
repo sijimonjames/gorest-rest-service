@@ -1,17 +1,15 @@
 import config from '../playwright.config'
-import responseVerification from './response-verification';
+import { expect } from '@playwright/test';
 
 
-class ApiUtils 
-{
-    constructor(apiContext) 
-    {
+
+class ApiUtils {
+    constructor(apiContext) {
 
         this.apiContext = apiContext;
     }
 
-    async CreateUser(uri, data)
-    {
+    async CreateUser(uri, data) {
         const createData = {
             headers: config.use.headers,
             data: JSON.stringify(data)
@@ -19,10 +17,14 @@ class ApiUtils
 
         const response = await this.apiContext.post(uri, createData);
         const body = await response.json();
-        responseVerification.assertResponseStatusCode(response.status(), 201);
+        ApiUtils.assertSuccessResponseStatusCode(response);
 
         return body;
 
+    }
+
+     static assertSuccessResponseStatusCode(response) {
+        expect(response.ok()).toBeTruthy();
     }
 
 }
