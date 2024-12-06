@@ -11,7 +11,7 @@ test.describe('CRUD operations for GOREST api', async () => {
     let userid;
     let apiContext;
     let apiUtils;
-    const userUri = config.use.path + ApiEndPoint.CREATE_USER;
+    const userUri = `${config.use.path}${ApiEndPoint.CREATE_USER}`;
     const userData = generateUserData();
 
 

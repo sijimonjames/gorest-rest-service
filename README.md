@@ -44,10 +44,15 @@ fake data is used to create user, as data is not so important for the api.
 npx playwright test
 npx playwright test --debug
 ```
+### To show playwright report
 
-## CI CD
+```
+npx playwright show-report
+```
+
+
+## CI-CD
 
 Git hub actions will be invoked and run all tests when a push / update repo is done. This can be found under the actions tab of Github
 
 https://github.com/sijimonjames/gorest-rest-service-tests/actions
-
