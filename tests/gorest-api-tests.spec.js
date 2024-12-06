@@ -22,7 +22,7 @@ test.describe('CRUD operations for GOREST api', async () => {
 
     })
 
-    test('should return success for create user gorest api @regression', async () => {
+    test('should return success for create user gorest api @smoke', async () => {
 
         const CreateUserData = await apiUtils.CreateUser(userUri, userData);
         userid = CreateUserData.id;
@@ -33,6 +33,11 @@ test.describe('CRUD operations for GOREST api', async () => {
         expect(CreateUserData).toHaveProperty("email", userData.email)
 
     })
+
+
+
+
+
 
     test('should return success to read user from gorest api @regression', async () => {
         if (!userid) {
